@@ -1,0 +1,104 @@
+/* =====================================================
+   UPLOAD WIDGET (zona za otpremanje fajlova + lista dokumenata)
+   Zajednička komponenta — koristi je operater (pregled/dodavanje
+   dokumentacije dronu) i admin (registracija novog drona).
+   ===================================================== */
+
+.doc-section-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: #7a9bbf;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+}
+
+.file-list { list-style: none; display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+
+.file-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.file-icon { font-size: 14px; }
+.file-name { flex: 1; font-size: 13px; color: #e0e6ed; word-break: break-all; }
+.file-size { font-size: 12px; color: #7a9bbf; flex-shrink: 0; }
+
+.file-remove {
+    background: transparent;
+    border: none;
+    color: #7a9bbf;
+    font-size: 12px;
+    cursor: pointer;
+    padding: 2px 4px;
+    border-radius: 4px;
+    flex-shrink: 0;
+    transition: background 0.2s, color 0.2s;
+}
+.file-remove:hover { background: rgba(220, 50, 50, 0.15); color: #ff6b6b; }
+
+.file-item.readonly .file-remove { display: none; }
+
+.upload-zone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    text-align: center;
+    padding: 20px 14px;
+    border: 1.5px dashed rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    color: #7a9bbf;
+    font-size: 13px;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.upload-zone:hover, .upload-zone.dragover {
+    border-color: #0078d4;
+    background: rgba(0, 120, 212, 0.06);
+}
+
+.upload-icon { font-size: 18px; opacity: 0.8; }
+.upload-link { color: #5eb3f5; font-weight: 600; }
+.upload-input { display: none; }
+
+/* ===== FOTOGRAFIJA DRONA - odabir jedne "naslovne" slike (npr. "Dodaj dron" forma) ===== */
+
+.drone-photo-picker-preview {
+    position: relative;
+    width: 100%;
+    max-width: 280px;
+    aspect-ratio: 4 / 3;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #05090f;
+}
+
+.drone-photo-picker-preview.empty {
+    border: 1.5px dashed rgba(255, 255, 255, 0.15);
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.drone-photo-picker-preview.empty:hover {
+    border-color: #0078d4;
+    background: rgba(0, 120, 212, 0.06);
+}
+
+.drone-photo-picker-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.drone-photo-picker-preview .drone-photo-actions .icon-btn.danger:hover {
+    background: rgba(220, 50, 50, 0.85);
+    border-color: #dc3232;
+}

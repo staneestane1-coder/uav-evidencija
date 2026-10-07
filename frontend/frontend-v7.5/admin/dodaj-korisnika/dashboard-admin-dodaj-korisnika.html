@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+<script src="../../shared/auth.js" data-required-role="administrator" data-login-path="../../login/login.html"></script>
+<script src="../../shared/api-config.js"></script>
+<script src="../../shared/api.js"></script>
+<script src="../../shared/change-password-modal.js"></script>
+<script src="../../shared/password-policy.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UAV Evidencija – Dodaj korisnika</title>
+<link rel="stylesheet" href="../../shared/layout.css">
+<link rel="stylesheet" href="../korisnici/dashboard-admin-korisnici.css">
+<link rel="stylesheet" href="dashboard-admin-dodaj-korisnika.css">
+</head>
+<body>
+
+    <nav class="sidebar">
+        <div class="sidebar-brand">
+            <span class="brand-icon">✈</span>
+            <h1>UAV Evidencija</h1>
+        </div>
+
+        <ul class="nav-list">
+            <li class="nav-item"><a href="../dashboard-admin.html"><span class="nav-icon" aria-hidden="true">📊</span> Pregled</a></li>
+            <li class="nav-item active"><a href="../korisnici/dashboard-admin-korisnici.html"><span class="nav-icon" aria-hidden="true">👤</span> Korisnici</a></li>
+            <li class="nav-item"><a href="../dronovi/dashboard-admin-dronovi.html"><span class="nav-icon" aria-hidden="true">🛰</span> Dronovi</a></li>
+            <li class="nav-item"><a href="../letovi/dashboard-admin-letovi.html"><span class="nav-icon" aria-hidden="true">🗺</span> Letovi</a></li>
+            <li class="nav-item"><a href="../aktivnosti/dashboard-admin-aktivnosti.html"><span class="nav-icon" aria-hidden="true">📋</span> Aktivnosti</a></li>
+            <li class="nav-item"><a href="../snimci/dashboard-admin-snimci.html"><span class="nav-icon" aria-hidden="true">📷</span> Snimci s terena</a></li>
+        </ul>
+
+        <div class="nav-divider"></div>
+        <div class="nav-logout">
+            <a href="#" id="logoutBtn"><span class="nav-icon" aria-hidden="true">⏻</span> Odjava</a>
+        </div>
+    </nav>
+
+    <main class="main">
+        <div class="page-header">
+            <div>
+                <a href="../korisnici/dashboard-admin-korisnici.html" class="back-link">← Nazad na korisnike</a>
+                <h2>Dodaj korisnika</h2>
+                <p>Unesite podatke za kreiranje novog korisničkog naloga</p>
+            </div>
+        </div>
+
+        <div class="panel form-panel">
+            <form id="addUserForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">Ime</label>
+                        <input type="text" id="firstName" placeholder="Marko" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Prezime</label>
+                        <input type="text" id="lastName" placeholder="Stanišić" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="marko.stanisic@uav.ba" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="userName">Korisničko ime</label>
+                    <input type="text" id="userName" placeholder="marko.stanisic" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="role">Uloga</label>
+                        <select id="role" required>
+                            <option value="">Odaberi ulogu</option>
+                            <option value="administrator">Administrator</option>
+                            <option value="kontrola_leta">Kontrola leta</option>
+                            <option value="operater">Operater</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <select id="status" required>
+                            <option value="aktivan">Aktivan</option>
+                            <option value="neaktivan">Neaktivan</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group" id="passwordGroup">
+                        <label for="password">Lozinka</label>
+                        <input type="password" id="password" placeholder="••••••••" required minlength="8" maxlength="128">
+                        <span class="field-error">Lozinka ne ispunjava uslove.</span>
+                    </div>
+                    <div class="form-group" id="confirmPasswordGroup">
+                        <label for="confirmPassword">Potvrdi lozinku</label>
+                        <input type="password" id="confirmPassword" placeholder="••••••••" required minlength="8" maxlength="128">
+                        <span class="field-error">Lozinke se ne podudaraju.</span>
+                    </div>
+                </div>
+                <p class="form-hint">Lozinka mora imati najmanje 8 karaktera, bar jedno slovo i bar jedan broj.</p>
+
+                <p class="form-error" id="formError"></p>
+
+                <div class="form-actions">
+                    <a href="../korisnici/dashboard-admin-korisnici.html" class="btn-cancel">Otkaži</a>
+                    <button type="submit" class="btn-primary">Sačuvaj korisnika</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script src="dashboard-admin-dodaj-korisnika.js"></script>
+    <script src="../../shared/dashboard-admin-logout.js" data-login-path="../../login/login.html"></script>
+</body>
+</html>

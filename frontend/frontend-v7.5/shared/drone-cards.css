@@ -1,0 +1,102 @@
+/* =====================================================
+   KARTICA DRONA (grid prikaz) — zajednička za admin i kontrola
+   leta "Dronovi" stranice.
+   -----------------------------------------------------
+   Izdvojeno iz dashboard-admin-dronovi.css / dashboard-kontrola-dronovi.css
+   (bili su ~90 identičnih linija duplirano u oba fajla). Ono što
+   ZAVISI od uloge (dugmad za izmjenu/brisanje + paginacija kod admina,
+   samo "Dokumentacija" dugme kod kontrole leta) OSTAJE u svom fajlu,
+   ovdje je samo dio koji je stvarno identičan (izgled same kartice).
+   ===================================================== */
+
+.drone-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.drone-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    overflow: hidden;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    transition: border-color 0.2s, transform 0.15s;
+    display: flex;
+    flex-direction: column;
+}
+
+.drone-card:hover { border-color: rgba(0, 120, 212, 0.4); transform: translateY(-2px); }
+.drone-card.offline { opacity: 0.7; }
+
+.drone-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+}
+
+.drone-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: rgba(0, 120, 212, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+.drone-name { font-size: 16px; font-weight: 700; color: #ffffff; margin-bottom: 4px; }
+.drone-serial { font-size: 12px; color: #7a9bbf; margin-bottom: 18px; }
+
+.drone-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 18px;
+    flex: 1;
+}
+
+.drone-stat {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.drone-stat .stat-label {
+    font-size: 12px;
+    color: #7a9bbf;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+    flex-shrink: 0;
+}
+
+.drone-stat .stat-value { font-size: 13px; color: #ffffff; font-weight: 600; flex-shrink: 0; }
+
+.battery-bar {
+    flex: 1;
+    height: 6px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+}
+
+.battery-fill { height: 100%; background: #4ade80; border-radius: 4px; }
+.battery-fill.low { background: #ff6b6b; }
+
+.drone-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.row-time { color: #7a9bbf; font-size: 12px; }

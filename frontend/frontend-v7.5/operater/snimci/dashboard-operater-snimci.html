@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+<script src="../../shared/auth.js" data-required-role="operater" data-login-path="../../login/login.html"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UAV Evidencija – Moji snimci</title>
+<link rel="stylesheet" href="../../shared/layout.css">
+<link rel="stylesheet" href="../../shared/upload-widget.css">
+<link rel="stylesheet" href="../../shared/media-cards.css">
+<link rel="stylesheet" href="../../shared/media-carousel.css">
+</head>
+<body>
+
+    <nav class="sidebar">
+        <div class="sidebar-brand">
+            <span class="brand-icon">✈</span>
+            <h1>UAV Evidencija</h1>
+        </div>
+
+        <ul class="nav-list">
+            <li class="nav-item"><a href="../dashboard-operater.html"><span class="nav-icon" aria-hidden="true">📊</span> Pregled</a></li>
+            <li class="nav-item"><a href="../letovi/dashboard-operater-letovi.html"><span class="nav-icon" aria-hidden="true">🗺</span> Moji letovi <span class="nav-badge" id="activeWarningsBadge"></span></a></li>
+            <li class="nav-item"><a href="../dronovi/dashboard-operater-dronovi.html"><span class="nav-icon" aria-hidden="true">🛰</span> Moji dronovi</a></li>
+            <li class="nav-item active"><a href="dashboard-operater-snimci.html"><span class="nav-icon" aria-hidden="true">📷</span> Moji snimci</a></li>
+        </ul>
+
+        <div class="nav-divider"></div>
+        <div class="nav-logout">
+            <a href="#" id="logoutBtn"><span class="nav-icon" aria-hidden="true">⏻</span> Odjava</a>
+        </div>
+    </nav>
+
+    <main class="main">
+        <div class="page-header">
+            <div>
+                <h2>Moji snimci</h2>
+                <p>Fotografije i video zapisi snimljeni tokom vaših letova, po lokaciji i dronu</p>
+            </div>
+            <a href="../prijavi-let/dashboard-operater-prijavi-let.html" class="btn-add">
+                <span>+</span> Dodaj novi let
+            </a>
+        </div>
+
+        <div class="toolbar">
+            <div class="search-box">
+                <span class="search-icon" aria-hidden="true">🔍</span>
+                <input type="text" id="snimciSearchInput" placeholder="Pretraži po lokaciji ili dronu..." aria-label="Pretraži po lokaciji ili dronu...">
+            </div>
+            <select class="filter-select" id="snimciDroneFilter" aria-label="Filtriraj po dronu">
+                <option value="">Svi dronovi</option>
+            </select>
+        </div>
+
+        <div class="media-grid" id="snimciGrid">
+            <!-- Kartice se generišu dinamički iz dashboard-operater-snimci.js na osnovu podataka sa backend-a (GET /letovi, filtrirano po ulogovanom operateru) -->
+        </div>
+
+        <p class="empty-state" id="snimciEmptyState">Nema snimaka koji odgovaraju pretrazi.</p>
+    </main>
+
+    <script src="../../shared/upload-widget.js"></script>
+    <script src="../../shared/api-config.js"></script>
+    <script src="../../shared/api.js"></script>
+    <script src="../../shared/change-password-modal.js"></script>
+    <script src="../../shared/active-warnings-badge.js"></script>
+    <script src="../../shared/media-carousel.js"></script>
+    <script src="../../shared/snimci-utils.js"></script>
+    <script src="dashboard-operater-snimci.js"></script>
+    <script src="../../shared/dashboard-admin-logout.js" data-login-path="../../login/login.html"></script>
+</body>
+</html>

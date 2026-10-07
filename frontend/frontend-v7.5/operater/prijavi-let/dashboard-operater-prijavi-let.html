@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+<script src="../../shared/auth.js" data-required-role="operater" data-login-path="../../login/login.html"></script>
+<script src="../../shared/api-config.js"></script>
+<script src="../../shared/api.js"></script>
+<script src="../../shared/change-password-modal.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UAV Evidencija – Prijavi let</title>
+<link rel="stylesheet" href="../../shared/layout.css">
+<link rel="stylesheet" href="../dashboard-operater.css">
+</head>
+<body>
+
+    <nav class="sidebar">
+        <div class="sidebar-brand">
+            <span class="brand-icon">✈</span>
+            <h1>UAV Evidencija</h1>
+        </div>
+
+        <ul class="nav-list">
+            <li class="nav-item"><a href="../dashboard-operater.html"><span class="nav-icon" aria-hidden="true">📊</span> Pregled</a></li>
+            <li class="nav-item active"><a href="../letovi/dashboard-operater-letovi.html"><span class="nav-icon" aria-hidden="true">🗺</span> Moji letovi <span class="nav-badge" id="activeWarningsBadge"></span></a></li>
+            <li class="nav-item"><a href="../dronovi/dashboard-operater-dronovi.html"><span class="nav-icon" aria-hidden="true">🛰</span> Moji dronovi</a></li>
+            <li class="nav-item"><a href="../snimci/dashboard-operater-snimci.html"><span class="nav-icon" aria-hidden="true">📷</span> Moji snimci</a></li>
+        </ul>
+
+        <div class="nav-divider"></div>
+        <div class="nav-logout">
+            <a href="#" id="logoutBtn"><span class="nav-icon" aria-hidden="true">⏻</span> Odjava</a>
+        </div>
+    </nav>
+
+    <main class="main">
+        <div class="page-header">
+            <div>
+                <h2>Prijavi let</h2>
+            </div>
+        </div>
+
+        <form id="letForm" novalidate>
+            <div class="form-layout">
+
+                <div class="panel form-panel">
+
+                    <div class="form-section" id="droneSection">
+                        <div class="form-section-title">Dron</div>
+                        <div class="form-group autocomplete-wrapper">
+                            <input type="text" id="droneSearch" placeholder="Upišite naziv drona..." autocomplete="off">
+                            <input type="hidden" id="drone">
+                            <ul class="autocomplete-list" id="droneSuggestions"></ul>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <div class="form-section-title">Vrijeme leta</div>
+
+                        <p class="form-hint" style="margin-top:0;">Let se prijavljuje sa statusom „Planiran“ i ide na odobrenje Kontroli leta. Nakon odobrenja ga sami pokrećete, a po obavljenom letu ga označavate kao završen - kroz „Moji letovi“.</p>
+
+                        <div class="form-group" id="futureDateTimeGroup">
+                            <div class="datetime-display editable">
+                                <span class="dt-icon">📅</span>
+                                <div class="dt-text">
+                                    <label class="dt-label" for="futureDateTime">Planirani datum i vrijeme</label>
+                                    <input type="datetime-local" id="futureDateTime" name="futureDateTime" class="dt-input">
+                                </div>
+                            </div>
+                            <p class="form-hint" style="margin-top:8px;">Let ostaje evidentiran kao „Planiran” do izabranog trenutka, ili dok ga sami ne pokrenete.</p>
+                            <span class="field-error">Molimo odaberite datum i vrijeme u budućnosti.</span>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <div class="form-section-title">Detalji leta</div>
+
+                        <div class="form-row">
+                            <div class="form-group" id="lokacijaGroup">
+                                <label for="lokacija">Lokacija leta</label>
+                                <input type="text" id="lokacija" name="lokacija" placeholder="npr. Istočno Sarajevo, poligon kod ETF-a" autocomplete="off">
+                                <span class="field-error">Molimo unesite lokaciju leta.</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="trajanje">Trajanje leta (min)<span class="optional-tag">opcionalno</span></label>
+                                <input type="number" id="trajanje" name="trajanje" min="1" placeholder="npr. 25">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="napomena">Napomena<span class="optional-tag">opcionalno</span></label>
+                            <textarea id="napomena" name="napomena" placeholder="Svrha leta, zapažanja, eventualni problemi tokom leta..."></textarea>
+                        </div>
+                    </div>
+
+                    <p class="form-error" id="formError"></p>
+
+                    <div class="form-actions">
+                        <a href="../dashboard-operater.html" class="btn-cancel">Otkaži</a>
+                        <button type="submit" class="btn-primary" id="submitBtn">Prijavi let</button>
+                    </div>
+                </div>
+
+                <div class="panel summary-panel">
+                    <div class="summary-panel-title">Pregled prijave</div>
+                    <div class="summary-row"><span class="summary-label">Dron</span><span class="summary-value" id="summaryDrone">—</span></div>
+                    <div class="summary-row"><span class="summary-label">Datum</span><span class="summary-value" id="summaryDate">—</span></div>
+                    <div class="summary-row"><span class="summary-label">Vrijeme</span><span class="summary-value" id="summaryTime">—</span></div>
+                    <div class="summary-row"><span class="summary-label">Lokacija</span><span class="summary-value" id="summaryLocation">Niste unijeli</span></div>
+                    <div class="summary-note">Nakon prijave, zahtjev ide na odobrenje Kontroli leta i u tabeli „Moji letovi“ dobija status „Na čekanju“. Nakon odobrenja postaje „Planiran“, spreman da ga pokrenete.</div>
+                </div>
+
+            </div>
+        </form>
+    </main>
+
+    <div class="toast-success" id="successToast"><span>✓</span> <span id="toastText">Let je uspješno prijavljen.</span></div>
+
+    <script src="../../shared/snimci-utils.js"></script>
+    <script src="../../shared/active-warnings-badge.js"></script>
+    <script src="../../shared/autocomplete.js"></script>
+    <script src="dashboard-operater-prijavi-let.js"></script>
+    <script src="../../shared/dashboard-admin-logout.js" data-login-path="../../login/login.html"></script>
+</body>
+</html>

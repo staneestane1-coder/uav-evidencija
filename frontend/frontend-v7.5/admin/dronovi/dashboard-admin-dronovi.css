@@ -1,0 +1,234 @@
+.page-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.page-header h2 { font-size: 24px; font-weight: 700; color: #ffffff; margin-bottom: 6px; }
+.page-header p { font-size: 14px; color: #7a9bbf; }
+
+.btn-add {
+    display: inline-flex;
+    text-decoration: none;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 20px;
+    background: #0078d4;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.btn-add:hover { background: #006abc; }
+.btn-add:active { transform: scale(0.98); }
+
+/* Toolbar */
+.toolbar { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
+
+.search-box { flex: 1; min-width: 220px; position: relative; }
+
+.search-box input {
+    width: 100%;
+    padding: 11px 16px 11px 38px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.search-box input::placeholder { color: #3d5a73; }
+.search-box input:focus { border-color: #0078d4; background: rgba(0, 120, 212, 0.08); }
+
+.search-box .search-icon {
+    position: absolute;
+    left: 13px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #3d5a73;
+    font-size: 14px;
+    pointer-events: none;
+}
+
+.filter-select {
+    padding: 11px 16px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    color: #e0e6ed;
+    font-size: 14px;
+    outline: none;
+    cursor: pointer;
+}
+
+.filter-select:focus { border-color: #0078d4; }
+
+/* Drone card grid - izgled same kartice (.drone-grid/.drone-card/.drone-stats/...)
+   je u shared/drone-cards.css (dijeli ga i kontrola/dronovi) - ovdje ostaje samo
+   ono što je specifično za admin ulogu (akcije, paginacija). */
+.row-actions { display: flex; gap: 8px; }
+
+.icon-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.04);
+    color: #7a9bbf;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.icon-btn:hover { background: rgba(0, 120, 212, 0.12); border-color: rgba(0, 120, 212, 0.3); color: #5eb3f5; }
+.icon-btn.danger:hover { background: rgba(220, 50, 50, 0.12); border-color: rgba(220, 50, 50, 0.3); color: #ff6b6b; }
+
+.badge { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+.badge.status-enabled { background: rgba(50, 180, 100, 0.15); color: #4ade80; }
+.badge.service { background: rgba(220, 150, 50, 0.15); color: #f5b95e; }
+.badge.offline { background: rgba(220, 50, 50, 0.15); color: #ff6b6b; }
+
+/* Footer / pagination */
+.panel-footer.standalone {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 4px;
+    font-size: 13px;
+    color: #7a9bbf;
+}
+
+.pagination { display: flex; gap: 6px; }
+
+.page-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.04);
+    color: #7a9bbf;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.page-btn:hover { background: rgba(255, 255, 255, 0.08); color: #ffffff; }
+.page-btn.active { background: #0078d4; color: #ffffff; border-color: #0078d4; }
+
+.form-hint { font-size: 12px; color: #7a9bbf; margin-bottom: 14px; line-height: 1.5; }
+
+/* Modal - dokumentacija drona */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 12, 20, 0.7);
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+    padding: 20px;
+}
+
+.modal-overlay.show { display: flex; }
+
+.modal-panel {
+    background: #16293d;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    width: 100%;
+    max-width: 480px;
+    max-height: 80vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.modal-header h3 { font-size: 17px; font-weight: 700; color: #ffffff; }
+
+/* .modal-close je u shared/layout.css */
+
+.modal-body { padding: 20px 24px 24px 24px; overflow-y: auto; }
+
+/* Potvrda brisanja */
+.confirm-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 12, 20, 0.7);
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 210;
+    padding: 20px;
+}
+
+.confirm-overlay.open { display: flex; }
+
+.confirm-box {
+    background: #16293d;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    width: 100%;
+    max-width: 380px;
+    padding: 24px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.confirm-box h3 { font-size: 17px; color: #ffffff; margin-bottom: 10px; }
+.confirm-box p { font-size: 14px; color: #a9c2d9; line-height: 1.5; margin-bottom: 20px; }
+.confirm-box p strong { color: #ffffff; }
+
+.confirm-actions { display: flex; justify-content: flex-end; gap: 10px; }
+
+.confirm-actions .btn-cancel {
+    padding: 10px 18px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: #e0e6ed;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.confirm-actions .btn-cancel:hover { background: rgba(255, 255, 255, 0.1); }
+
+.btn-danger {
+    padding: 10px 18px;
+    background: rgba(220, 50, 50, 0.9);
+    border: none;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-danger:hover { background: rgba(220, 50, 50, 1); }
+
+/* Responsive */

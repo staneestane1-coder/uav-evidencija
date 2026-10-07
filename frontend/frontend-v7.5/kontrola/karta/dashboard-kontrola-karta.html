@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+<script src="../../shared/auth.js" data-required-role="kontrola_leta" data-login-path="../../login/login.html"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UAV Evidencija – Karta letova</title>
+<link rel="stylesheet" href="../../shared/layout.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="../dashboard-kontrola.css">
+</head>
+<body>
+
+    <nav class="sidebar">
+        <div class="sidebar-brand">
+            <span class="brand-icon">✈</span>
+            <h1>UAV Evidencija</h1>
+        </div>
+
+        <ul class="nav-list">
+            <li class="nav-item"><a href="../dashboard-kontrola.html"><span class="nav-icon" aria-hidden="true">📊</span> Pregled</a></li>
+            <li class="nav-item"><a href="../letovi-na-cekanju/dashboard-kontrola-letovi-na-cekanju.html"><span class="nav-icon" aria-hidden="true">⏳</span> Letovi na čekanju <span class="nav-badge" id="pendingFlightsBadge"></span></a></li>
+            <li class="nav-item"><a href="../letovi/dashboard-kontrola-letovi.html"><span class="nav-icon" aria-hidden="true">🗺</span> Letovi</a></li>
+            <li class="nav-item active"><a href="dashboard-kontrola-karta.html"><span class="nav-icon" aria-hidden="true">📍</span> Karta letova</a></li>
+            <li class="nav-item"><a href="../izvjestaji/dashboard-kontrola-izvjestaji.html"><span class="nav-icon" aria-hidden="true">📄</span> Izvještaji</a></li>
+            <li class="nav-item"><a href="../operateri/dashboard-kontrola-operateri.html"><span class="nav-icon" aria-hidden="true">👤</span> Operateri</a></li>
+            <li class="nav-item"><a href="../dronovi/dashboard-kontrola-dronovi.html"><span class="nav-icon" aria-hidden="true">🛰</span> Dronovi</a></li>
+            <li class="nav-item"><a href="../snimci/dashboard-kontrola-snimci.html"><span class="nav-icon" aria-hidden="true">📷</span> Snimci s terena</a></li>
+        </ul>
+
+        <div class="nav-divider"></div>
+        <div class="nav-logout">
+            <a href="#" id="logoutBtn"><span class="nav-icon" aria-hidden="true">⏻</span> Odjava</a>
+        </div>
+    </nav>
+
+    <main class="main">
+        <div class="page-header">
+            <h2>Karta letova</h2>
+            <p>Geografski prikaz svih letova u sistemu</p>
+        </div>
+
+        <div class="filter-bar">
+            <div class="filter-group">
+                <label for="filterStatus">Status</label>
+                <select id="filterStatus">
+                    <option value="svi">Svi statusi</option>
+                    <option value="u-letu">U letu</option>
+                    <option value="zavrsen">Završen</option>
+                    <option value="planiran">Planiran</option>
+                </select>
+            </div>
+
+            <div class="filter-group autocomplete-wrapper">
+                <label for="filterOperater">Operater</label>
+                <input type="text" id="filterOperater" placeholder="Svi operateri" autocomplete="off">
+                <ul class="autocomplete-list" id="filterOperaterSuggestions"></ul>
+            </div>
+        </div>
+
+        <div class="map-legend">
+            <span class="legend-item"><span class="legend-dot active"></span> U letu</span>
+            <span class="legend-item"><span class="legend-dot success"></span> Završen</span>
+            <span class="legend-item"><span class="legend-dot planned"></span> Planiran</span>
+        </div>
+
+        <div class="map-layout">
+            <div class="panel map-panel">
+                <div id="map"></div>
+            </div>
+
+            <div class="panel flight-list-panel">
+                <div class="panel-header">
+                    <h3>Letovi na karti</h3>
+                    <span class="result-count" id="resultCount"></span>
+                </div>
+                <p class="map-note">Lokacija se prikazuje po nazivu mjesta iz prijave leta (nivo grada/opštine, ne GPS koordinata drona) — automatski se geokodira preko OpenStreetMap Nominatim servisa, radi za bilo koji naziv mjesta.</p>
+                <div class="flight-list-map" id="flightList"></div>
+                <div id="unmatchedSection" style="display:none;">
+                    <p class="map-note" style="margin-top:14px;">Letovi bez prepoznate lokacije (nisu prikazani na karti):</p>
+                    <div class="flight-list-map" id="unmatchedList"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+    <script src="../../shared/api-config.js"></script>
+    <script src="../../shared/api.js"></script>
+    <script src="../../shared/pending-flights-badge.js"></script>
+    <script src="../../shared/change-password-modal.js"></script>
+    <script src="../../shared/snimci-utils.js"></script>
+    <script src="dashboard-kontrola-karta.js"></script>
+    <script src="../../shared/dashboard-admin-logout.js" data-login-path="../../login/login.html"></script>
+</body>
+</html>

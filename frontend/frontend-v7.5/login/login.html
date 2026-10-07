@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UAV Evidencija – Prijava</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+    <div class="login-wrapper">
+
+        <div class="login-brand">
+            <div class="brand-icon">✈</div>
+            <h1>UAV Evidencija</h1>
+            <p>Sistem za nadzor i evidenciju bespilotnih letjelica</p>
+        </div>
+
+        <div class="login-card">
+            <h2>Prijava u sistem</h2>
+
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="username">Korisničko ime</label>
+                    <input type="text" id="username" placeholder="Unesite korisničko ime" autocomplete="username" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Lozinka</label>
+                    <input type="password" id="password" placeholder="Unesite lozinku" autocomplete="current-password" required>
+                </div>
+
+                <div class="error-msg" id="errorMsg">Pogrešno korisničko ime ili lozinka.</div>
+
+                <button type="submit" class="btn-login">Prijavi se</button>
+
+                <p class="form-hint"><a href="forgot-password.html" id="forgotPasswordLink">Zaboravili ste lozinku?</a></p>
+            </form>
+        </div>
+
+        <div class="login-footer">
+            Pristup isključivo za ovlašteno osoblje.
+        </div>
+
+    </div>
+
+    <script src="../shared/api-config.js"></script>
+    <script src="../shared/api.js"></script>
+    <script src="login.js"></script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+<script src="../../shared/auth.js" data-required-role="administrator" data-login-path="../../login/login.html"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UAV Evidencija – Dodaj dron</title>
+<link rel="stylesheet" href="../../shared/layout.css">
+<link rel="stylesheet" href="../../shared/upload-widget.css">
+<link rel="stylesheet" href="../dronovi/dashboard-admin-dronovi.css">
+<link rel="stylesheet" href="dashboard-admin-dodaj-dron.css">
+</head>
+<body>
+
+    <nav class="sidebar">
+        <div class="sidebar-brand">
+            <span class="brand-icon">✈</span>
+            <h1>UAV Evidencija</h1>
+        </div>
+
+        <ul class="nav-list">
+            <li class="nav-item"><a href="../dashboard-admin.html"><span class="nav-icon" aria-hidden="true">📊</span> Pregled</a></li>
+            <li class="nav-item"><a href="../korisnici/dashboard-admin-korisnici.html"><span class="nav-icon" aria-hidden="true">👤</span> Korisnici</a></li>
+            <li class="nav-item active"><a href="../dronovi/dashboard-admin-dronovi.html"><span class="nav-icon" aria-hidden="true">🛰</span> Dronovi</a></li>
+            <li class="nav-item"><a href="../letovi/dashboard-admin-letovi.html"><span class="nav-icon" aria-hidden="true">🗺</span> Letovi</a></li>
+            <li class="nav-item"><a href="../aktivnosti/dashboard-admin-aktivnosti.html"><span class="nav-icon" aria-hidden="true">📋</span> Aktivnosti</a></li>
+            <li class="nav-item"><a href="../snimci/dashboard-admin-snimci.html"><span class="nav-icon" aria-hidden="true">📷</span> Snimci s terena</a></li>
+        </ul>
+
+        <div class="nav-divider"></div>
+        <div class="nav-logout">
+            <a href="#" id="logoutBtn"><span class="nav-icon" aria-hidden="true">⏻</span> Odjava</a>
+        </div>
+    </nav>
+
+    <main class="main">
+        <div class="page-header">
+            <div>
+                <a href="../dronovi/dashboard-admin-dronovi.html" class="back-link">← Nazad na dronove</a>
+                <h2>Dodaj dron</h2>
+                <p>Unesite podatke za registraciju novog drona</p>
+            </div>
+        </div>
+
+        <div class="panel form-panel">
+            <form id="addDroneForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="droneName">Naziv / oznaka drona</label>
+                        <input type="text" id="droneName" placeholder="DJI-Mavic-03" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="droneModel">Model</label>
+                        <input type="text" id="droneModel" placeholder="DJI Mavic 3" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="manufacturer">Proizvođač</label>
+                        <input type="text" id="manufacturer" placeholder="DJI" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="serialNumber">Serijski broj</label>
+                        <input type="text" id="serialNumber" placeholder="SN-2026-00123" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group autocomplete-wrapper">
+                        <label for="operatorSearch">Dodijeljen operateru</label>
+                        <input type="text" id="operatorSearch" placeholder="Upišite ime operatera..." autocomplete="off" required>
+                        <input type="hidden" id="operator">
+                        <ul class="autocomplete-list" id="operatorSuggestions"></ul>
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <select id="status" required>
+                            <option value="aktivan">Aktivan</option>
+                            <option value="servis">U servisu</option>
+                            <option value="neaktivan">Neaktivan</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="notes">Napomena (opciono)</label>
+                    <input type="text" id="notes" placeholder="Dodatne informacije o dronu">
+                </div>
+
+                <div class="doc-section">
+                    <div class="doc-section-title">Fotografija drona (opciono)</div>
+                    <p class="form-hint">
+                        Ova fotografija se prikazuje na kartici drona u pregledu. Kasnije se može promijeniti preko „📎" dugmeta na kartici.
+                    </p>
+                    <div class="drone-photo-picker">
+                        <div class="drone-photo-picker-preview empty" id="dronePhotoPreview">
+                            <div class="drone-photo-placeholder">🛰</div>
+                        </div>
+                        <input type="file" id="dronePhotoInput" accept="image/jpeg,image/png,image/webp" style="display:none;">
+                    </div>
+                </div>
+
+                <div class="doc-section">
+                    <div class="doc-section-title">Tehnička dokumentacija (opciono)</div>
+                    <p class="form-hint">
+                        Možete odmah priložiti početnu dokumentaciju (uputstvo, atest, fotografije).
+                        Operater kasnije može dodavati dodatnu dokumentaciju tokom korištenja drona.
+                    </p>
+                    <ul class="file-list" id="fileList-newDrone"></ul>
+                    <label class="upload-zone" for="upload-newDrone">
+                        <span class="upload-icon">⬆</span>
+                        <span>Prevuci fajlove ovdje ili <span class="upload-link">odaberi sa računara</span></span>
+                        <input type="file" id="upload-newDrone" class="upload-input" data-list="fileList-newDrone" multiple accept=".jpg,.jpeg,.png,.webp,.mp4,.mov,.avi,.pdf,.doc,.docx">
+                    </label>
+                </div>
+
+                <p class="form-error" id="formError"></p>
+
+                <div class="form-actions">
+                    <a href="../dronovi/dashboard-admin-dronovi.html" class="btn-cancel">Otkaži</a>
+                    <button type="submit" class="btn-primary">Sačuvaj dron</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script src="../../shared/upload-widget.js"></script>
+    <script src="../../shared/api-config.js"></script>
+    <script src="../../shared/api.js"></script>
+    <script src="../../shared/change-password-modal.js"></script>
+    <script src="dashboard-admin-dodaj-dron.js"></script>
+    <script src="../../shared/dashboard-admin-logout.js" data-login-path="../../login/login.html"></script>
+    
+</body>
+</html>

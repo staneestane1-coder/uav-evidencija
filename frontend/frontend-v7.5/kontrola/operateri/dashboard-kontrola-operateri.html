@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+<script src="../../shared/auth.js" data-required-role="kontrola_leta" data-login-path="../../login/login.html"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UAV Evidencija – Operateri</title>
+<link rel="stylesheet" href="../../shared/layout.css">
+<link rel="stylesheet" href="../dashboard-kontrola.css">
+</head>
+<body>
+
+    <nav class="sidebar">
+        <div class="sidebar-brand">
+            <span class="brand-icon">✈</span>
+            <h1>UAV Evidencija</h1>
+        </div>
+
+        <ul class="nav-list">
+            <li class="nav-item"><a href="../dashboard-kontrola.html"><span class="nav-icon" aria-hidden="true">📊</span> Pregled</a></li>
+            <li class="nav-item"><a href="../letovi-na-cekanju/dashboard-kontrola-letovi-na-cekanju.html"><span class="nav-icon" aria-hidden="true">⏳</span> Letovi na čekanju <span class="nav-badge" id="pendingFlightsBadge"></span></a></li>
+            <li class="nav-item"><a href="../letovi/dashboard-kontrola-letovi.html"><span class="nav-icon" aria-hidden="true">🗺</span> Letovi</a></li>
+            <li class="nav-item"><a href="../karta/dashboard-kontrola-karta.html"><span class="nav-icon" aria-hidden="true">📍</span> Karta letova</a></li>
+            <li class="nav-item"><a href="../izvjestaji/dashboard-kontrola-izvjestaji.html"><span class="nav-icon" aria-hidden="true">📄</span> Izvještaji</a></li>
+            <li class="nav-item active"><a href="dashboard-kontrola-operateri.html"><span class="nav-icon" aria-hidden="true">👤</span> Operateri</a></li>
+            <li class="nav-item"><a href="../dronovi/dashboard-kontrola-dronovi.html"><span class="nav-icon" aria-hidden="true">🛰</span> Dronovi</a></li>
+            <li class="nav-item"><a href="../snimci/dashboard-kontrola-snimci.html"><span class="nav-icon" aria-hidden="true">📷</span> Snimci s terena</a></li>
+        </ul>
+
+        <div class="nav-divider"></div>
+        <div class="nav-logout">
+            <a href="#" id="logoutBtn"><span class="nav-icon" aria-hidden="true">⏻</span> Odjava</a>
+        </div>
+    </nav>
+
+    <main class="main">
+        <div class="page-header">
+            <h2>Operateri</h2>
+            <p>Pregled svih operatera i njihove operativne aktivnosti</p>
+        </div>
+
+        <div class="filter-bar">
+            <div class="filter-group search">
+                <label for="filterSearch">Pretraga</label>
+                <input type="text" id="filterSearch" placeholder="Pretraži po imenu" aria-label="Pretraži po imenu">
+            </div>
+
+            <div class="filter-group">
+                <label for="filterStatus">Status</label>
+                <select id="filterStatus">
+                    <option value="svi">Svi statusi</option>
+                    <option value="aktivan">Aktivan</option>
+                    <option value="neaktivan">Neaktivan</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="sortBy">Sortiraj po</label>
+                <select id="sortBy">
+                    <option value="ime">Imenu</option>
+                    <option value="letovi">Broju letova</option>
+                    <option value="sati">Satima leta</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="operateri-grid" id="operateriGrid"></div>
+
+        <p class="empty-state" id="emptyState">Nema operatera koji odgovaraju pretrazi.</p>
+    </main>
+
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-panel">
+            <div class="modal-header">
+                <h3 id="modalName">—</h3>
+                <button type="button" class="modal-close" id="modalClose" aria-label="Zatvori">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-stats-row">
+                    <div class="modal-stat">
+                        <span class="modal-stat-label">Letova ukupno</span>
+                        <span class="modal-stat-value" id="modalFlights">—</span>
+                    </div>
+                    <div class="modal-stat">
+                        <span class="modal-stat-label">Sati leta</span>
+                        <span class="modal-stat-value" id="modalHours">—</span>
+                    </div>
+                    <div class="modal-stat">
+                        <span class="modal-stat-label">Dronovi</span>
+                        <span class="modal-stat-value" id="modalDrones">—</span>
+                    </div>
+                </div>
+                <div class="modal-section-title">Posljednji letovi</div>
+                <ul class="modal-flight-list" id="modalFlightList"></ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../shared/api-config.js"></script>
+    <script src="../../shared/api.js"></script>
+    <script src="../../shared/pending-flights-badge.js"></script>
+    <script src="../../shared/change-password-modal.js"></script>
+    <script src="../../shared/snimci-utils.js"></script>
+    <script src="dashboard-kontrola-operateri.js"></script>
+    <script src="../../shared/dashboard-admin-logout.js" data-login-path="../../login/login.html"></script>
+</body>
+</html>

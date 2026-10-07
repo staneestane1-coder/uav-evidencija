@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+<script src="../../shared/auth.js" data-required-role="administrator" data-login-path="../../login/login.html"></script>
+<script src="../../shared/api-config.js"></script>
+<script src="../../shared/api.js"></script>
+<script src="../../shared/change-password-modal.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UAV Evidencija – Letovi</title>
+<link rel="stylesheet" href="../../shared/layout.css">
+<link rel="stylesheet" href="dashboard-admin-letovi.css">
+</head>
+<body>
+
+    <nav class="sidebar">
+        <div class="sidebar-brand">
+            <span class="brand-icon">✈</span>
+            <h1>UAV Evidencija</h1>
+        </div>
+
+        <ul class="nav-list">
+            <li class="nav-item"><a href="../dashboard-admin.html"><span class="nav-icon" aria-hidden="true">📊</span> Pregled</a></li>
+            <li class="nav-item"><a href="../korisnici/dashboard-admin-korisnici.html"><span class="nav-icon" aria-hidden="true">👤</span> Korisnici</a></li>
+            <li class="nav-item"><a href="../dronovi/dashboard-admin-dronovi.html"><span class="nav-icon" aria-hidden="true">🛰</span> Dronovi</a></li>
+            <li class="nav-item active"><a href="dashboard-admin-letovi.html"><span class="nav-icon" aria-hidden="true">🗺</span> Letovi</a></li>
+            <li class="nav-item"><a href="../aktivnosti/dashboard-admin-aktivnosti.html"><span class="nav-icon" aria-hidden="true">📋</span> Aktivnosti</a></li>
+            <li class="nav-item"><a href="../snimci/dashboard-admin-snimci.html"><span class="nav-icon" aria-hidden="true">📷</span> Snimci s terena</a></li>
+        </ul>
+
+        <div class="nav-divider"></div>
+        <div class="nav-logout">
+            <a href="#" id="logoutBtn"><span class="nav-icon" aria-hidden="true">⏻</span> Odjava</a>
+        </div>
+    </nav>
+
+    <main class="main">
+        <div class="page-header">
+            <div>
+                <h2>Letovi</h2>
+                <p>Evidencija svih letova bespilotnih letjelica</p>
+            </div>
+            <a href="../prijavi-let/dashboard-admin-prijavi-let.html" class="btn-add">
+                <span>+</span> Prijavi let
+            </a>
+        </div>
+
+        <div class="filters">
+            <input type="text" class="search-input" id="letSearchInput" placeholder="Pretraži po operateru, dronu ili lokaciji..." aria-label="Pretraži po operateru, dronu ili lokaciji...">
+
+            <select class="filter-select" id="letStatusFilter" aria-label="Filtriraj po statusu leta">
+                <option value="">Svi statusi</option>
+                <option value="na-cekanju">Na čekanju</option>
+                <option value="u-letu">U letu</option>
+                <option value="zavrsen">Završen</option>
+                <option value="planiran">Planiran</option>
+                <option value="odbijen">Odbijen</option>
+                <option value="otkazan">Otkazan</option>
+            </select>
+        </div>
+
+        <div class="panel">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Operater</th>
+                        <th>Dron</th>
+                        <th>Lokacija</th>
+                        <th>Status</th>
+                        <th>Vrijeme</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="letoviTableBody"></tbody>
+            </table>
+        </div>
+    </main>
+    
+    <script src="../../shared/snimci-utils.js"></script>
+    <script src="dashboard-admin-letovi.js"></script>
+    <script src="../../shared/dashboard-admin-logout.js" data-login-path="../../login/login.html"></script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+<script src="../../shared/auth.js" data-required-role="administrator" data-login-path="../../login/login.html"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UAV Evidencija – Prijavi let</title>
+<link rel="stylesheet" href="../../shared/layout.css">
+<link rel="stylesheet" href="../letovi/dashboard-admin-letovi.css">
+<link rel="stylesheet" href="../dodaj-dron/dashboard-admin-dodaj-dron.css">
+</head>
+<body>
+
+    <nav class="sidebar">
+        <div class="sidebar-brand">
+            <span class="brand-icon">✈</span>
+            <h1>UAV Evidencija</h1>
+        </div>
+
+        <ul class="nav-list">
+            <li class="nav-item"><a href="../dashboard-admin.html"><span class="nav-icon" aria-hidden="true">📊</span> Pregled</a></li>
+            <li class="nav-item"><a href="../korisnici/dashboard-admin-korisnici.html"><span class="nav-icon" aria-hidden="true">👤</span> Korisnici</a></li>
+            <li class="nav-item"><a href="../dronovi/dashboard-admin-dronovi.html"><span class="nav-icon" aria-hidden="true">🛰</span> Dronovi</a></li>
+            <li class="nav-item active"><a href="../letovi/dashboard-admin-letovi.html"><span class="nav-icon" aria-hidden="true">🗺</span> Letovi</a></li>
+            <li class="nav-item"><a href="../aktivnosti/dashboard-admin-aktivnosti.html"><span class="nav-icon" aria-hidden="true">📋</span> Aktivnosti</a></li>
+            <li class="nav-item"><a href="../snimci/dashboard-admin-snimci.html"><span class="nav-icon" aria-hidden="true">📷</span> Snimci s terena</a></li>
+        </ul>
+
+        <div class="nav-divider"></div>
+        <div class="nav-logout">
+            <a href="#" id="logoutBtn"><span class="nav-icon" aria-hidden="true">⏻</span> Odjava</a>
+        </div>
+    </nav>
+
+    <main class="main">
+        <div class="page-header">
+            <div>
+                <a href="../letovi/dashboard-admin-letovi.html" class="back-link">← Nazad na letove</a>
+                <h2>Prijavi let</h2>
+                <p>Evidentirajte let na svoj nalog ili, po potrebi, u ime odabranog operatera</p>
+            </div>
+        </div>
+
+        <div class="panel form-panel">
+            <form id="createFlightForm">
+                <div class="form-row">
+                    <div class="form-group autocomplete-wrapper">
+                        <label for="operatorSearch">Operater (opciono)</label>
+                        <input type="text" id="operatorSearch" placeholder="Upišite ime operatera..." autocomplete="off">
+                        <input type="hidden" id="operator">
+                        <ul class="autocomplete-list" id="operatorSuggestions"></ul>
+                    </div>
+                    <div class="form-group autocomplete-wrapper" id="droneGroup">
+                        <label for="droneSearch">Dron</label>
+                        <input type="text" id="droneSearch" placeholder="Upišite naziv drona..." autocomplete="off">
+                        <input type="hidden" id="drone">
+                        <ul class="autocomplete-list" id="droneSuggestions"></ul>
+                        <span class="field-error">Molimo odaberite dron.</span>
+                        <p class="form-hint" id="droneHint" style="margin-top:8px; display:none;">Operater nema nijedan pridružen dron.</p>
+                    </div>
+                </div>
+                <p class="form-hint">Ostavite polje "Operater" prazno da let vodite na svoj (administratorski) nalog. Kad odaberete operatera, ponuđeni dronovi se svode na one koji su njemu dodijeljeni.</p>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="lokacija">Lokacija (opciono)</label>
+                        <input type="text" id="lokacija" placeholder="npr. Banja Luka">
+                    </div>
+                    <div class="form-group" id="flightDateTimeGroup">
+                        <label for="flightDateTime">Datum i vrijeme</label>
+                        <input type="datetime-local" id="flightDateTime" required>
+                        <span class="field-error">Molimo unesite datum i vrijeme leta.</span>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="trajanje">Trajanje (min, opciono)</label>
+                        <input type="number" id="trajanje" min="0" placeholder="npr. 25">
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <select id="status" required>
+                            <option value="planiran">Planiran</option>
+                            <option value="u-letu">U letu</option>
+                            <option value="zavrsen" selected>Završen</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="napomena">Napomena (opciono)</label>
+                    <input type="text" id="napomena" placeholder="Dodatne informacije o letu">
+                </div>
+
+                <p class="form-hint">
+                    Ovo je direktan, pouzdan unos (bez odobrenja Kontrole leta) - isto ovlaštenje
+                    kao kod „Izmijeni let". Koristite ga za naknadni/ručni unos leta, npr. kad
+                    operater nema pristup sistemu.
+                </p>
+
+                <p class="form-error" id="formError"></p>
+
+                <div class="form-actions">
+                    <a href="../letovi/dashboard-admin-letovi.html" class="btn-cancel">Otkaži</a>
+                    <button type="submit" class="btn-primary">Prijavi let</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script src="../../shared/api-config.js"></script>
+    <script src="../../shared/api.js"></script>
+    <script src="../../shared/change-password-modal.js"></script>
+    <script src="../../shared/autocomplete.js"></script>
+    <script src="dashboard-admin-prijavi-let.js"></script>
+    <script src="../../shared/dashboard-admin-logout.js" data-login-path="../../login/login.html"></script>
+</body>
+</html>

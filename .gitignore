@@ -1,0 +1,105 @@
+## ===== .NET / Visual Studio =====
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio cache/options directory
+.vs/
+*.VC.db
+*.VC.VC.opendb
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.userprefs
+
+# User-specific files (MonoDevelop/Xamarin Studio)
+*.usertasks
+
+# Build cache
+.vs/
+
+# Visual Studio 2017 auto generated files
+Generated\ Files/
+
+# MSTest test Results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# NuGet
+*.nupkg
+*.snupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+*.nuget.props
+*.nuget.targets
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# .NET Core
+project.lock.json
+.dotnet/
+
+# ASP.NET Core user secrets (NIKAD ne commitovati prave tajne/secrets.json)
+**/secrets.json
+**/UserSecrets/
+
+# Rider
+.idea/
+*.sln.iml
+
+# VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Environment / lokalne konfiguracije s tajnama
+*.env
+.env.*
+appsettings.*.local.json
+
+# Certifikati / ključevi
+*.pfx
+*.p12
+*.key
+*.pem
+
+# Logovi i privremeni fajlovi
+*.log
+*.tmp
+*.bak
+
+## ===== Projekat-specifično =====
+
+# Originalna arhiva za predaju (ne treba u istoriji repozitorija)
+*.zip
+
+# Lokalni upload/App_Data sadržaj (ostaje samo struktura foldera)
+backend/diplomski-backend/DronBackend/App_Data/*
+!backend/diplomski-backend/DronBackend/App_Data/.gitkeep

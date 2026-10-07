@@ -1,0 +1,371 @@
+/* =====================================================
+   ZAJEDNIČKI LAYOUT (sidebar + osnovni raspored stranice)
+   Koristi ga svaka dashboard stranica (admin, kontrola, operater).
+   Sidebar je fiksiran uz lijevu ivicu (position: fixed) i ne
+   pomjera se kad sadržaj u .main postane duži od ekrana –
+   skroluje se samo desni dio (.main).
+   ===================================================== */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #0d1b2a;
+    background-image:
+        radial-gradient(ellipse at 20% 50%, rgba(0, 80, 160, 0.15) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(0, 120, 200, 0.1) 0%, transparent 50%);
+    min-height: 100vh;
+    color: #e0e6ed;
+    display: flex;
+}
+
+/* ===== SIDEBAR (fiksiran uz lijevu ivicu) ===== */
+.sidebar {
+    width: 240px;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.03);
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    padding: 28px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-y: auto;
+    z-index: 50;
+}
+
+.sidebar-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 24px 28px 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    margin-bottom: 20px;
+}
+
+.sidebar-brand .brand-icon { font-size: 24px; filter: drop-shadow(0 0 8px rgba(0, 140, 255, 0.6)); }
+.sidebar-brand h1 { font-size: 16px; font-weight: 700; color: #ffffff; letter-spacing: 0.5px; }
+
+.nav-list { list-style: none; display: flex; flex-direction: column; gap: 4px; padding: 0 12px; flex: 1; }
+
+.nav-item a {
+    display: flex; align-items: center; gap: 12px; padding: 11px 14px; border-radius: 8px;
+    color: #7a9bbf; text-decoration: none; font-size: 14px; font-weight: 500;
+    transition: background 0.2s, color 0.2s;
+}
+
+.nav-item a .nav-icon { font-size: 16px; width: 20px; text-align: center; }
+.nav-item a:hover { background: rgba(255, 255, 255, 0.05); color: #ffffff; }
+
+.nav-item.active a {
+    background: rgba(0, 120, 212, 0.15);
+    color: #ffffff;
+    border: 1px solid rgba(0, 120, 212, 0.35);
+}
+
+/* Broj uz nav-item (npr. "Letovi na čekanju" - vidi shared/pending-flights-badge.js) -
+   sakriven dok se broj ne učita/ako je 0, da sidebar ne "skoči" pri učitavanju stranice. */
+.nav-badge {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    border-radius: 9px;
+    background: #e15b5b;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1;
+}
+.nav-badge.visible { display: inline-flex; }
+
+.nav-divider { height: 1px; background: rgba(255, 255, 255, 0.08); margin: 12px 12px 12px 12px; }
+.nav-logout { padding: 0 12px; }
+
+.nav-logout a {
+    display: flex; align-items: center; gap: 12px; padding: 11px 14px; border-radius: 8px;
+    color: #ff6b6b; text-decoration: none; font-size: 14px; font-weight: 500; transition: background 0.2s;
+}
+
+.nav-logout a:hover { background: rgba(220, 50, 50, 0.12); }
+
+/* ===== GLAVNI SADRŽAJ (pomjera se nezavisno od sidebara) ===== */
+.main { flex: 1; margin-left: 240px; padding: 40px 48px; max-width: 1200px; }
+
+.state-error { color: #ff6b6b; }
+
+/* ===== PER-FIELD VALIDACIJA (zajednicko za sve forme) ===== */
+
+.field-error {
+    font-size: 12px;
+    color: #ff6b6b;
+    margin-top: 6px;
+    display: none;
+}
+
+.form-group.error input,
+.form-group.error select,
+.form-group.error textarea {
+    border-color: #ff6b6b;
+}
+
+/* Bez ovoga, :focus stil definisan po stranici (ista specifičnost, kasnije u
+   redoslijedu ucitavanja) prekriva crveni okvir greske dok je polje fokusirano -
+   korisnik ne vidi da je polje neispravno dok ne klikne negdje drugo. */
+.form-group.error input:focus,
+.form-group.error select:focus,
+.form-group.error textarea:focus {
+    border-color: #ff6b6b;
+}
+
+.form-group.error .field-error { display: block; }
+
+/* ===== MODAL CLOSE (zajednicko dugme za zatvaranje modala) ===== */
+.modal-close {
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: #7a9bbf;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 4px 8px;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.modal-close:hover {
+    background: rgba(0, 120, 212, 0.12);
+    border-color: rgba(0, 120, 212, 0.3);
+    color: #5eb3f5;
+}
+
+/* ===== FOCUS-VISIBLE (tastaturna navigacija za dugmad) ===== */
+button:focus-visible,
+a.btn-add:focus-visible,
+a.btn-cancel:focus-visible,
+.operater-card:focus-visible {
+    outline: 2px solid #0078d4;
+    outline-offset: 2px;
+}
+
+/* ===== ICON-BTN - onemogućeno stanje =====
+   Osnovna .icon-btn definicija je po stranici (korisnici/dronovi/media-cards.css),
+   ali :disabled stanje nedostaje svuda - dugme poput "obriši sopstveni nalog" je
+   funkcionalno blokirano ali vizuelno identično aktivnim dugmadima. Definisano
+   ovdje jednom umjesto trostruko po svakom fajlu koji definiše .icon-btn. */
+.icon-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* ===== FILTER BAR (zajednicko za kontrola/operater filtere iznad tabela/gridova) ===== */
+
+.filter-bar {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    margin-bottom: 20px;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 170px;
+}
+
+.filter-group.search { flex: 1; min-width: 220px; }
+
+.filter-group label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #7a9bbf;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.filter-group select,
+.filter-group input {
+    padding: 10px 14px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 14px;
+    font-family: inherit;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.filter-group select option {
+    background: #10233a;
+    color: #e0e6ed;
+}
+
+/* Admin stranice (korisnici/letovi/dronovi/aktivnosti) koriste <select class="filter-select">
+   direktno, bez ".filter-group" omotaca kao kontrola/operater stranice - gornje pravilo ih
+   zato ne pogadja, pa je padajuca lista ostajala sa podrazumijevanom (bijelom) pozadinom
+   browsera umjesto tamnom temom stranice. */
+.filter-select option {
+    background: #10233a;
+    color: #e0e6ed;
+}
+
+.filter-group select {
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%237a9bbf' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+    cursor: pointer;
+}
+
+.filter-group input::placeholder { color: #5a7699; }
+
+.filter-group select:focus,
+.filter-group input:focus {
+    outline: none;
+    border-color: #0078d4;
+    background: rgba(0, 120, 212, 0.06);
+}
+
+.result-count { font-size: 12px; color: #7a9bbf; }
+
+.empty-state {
+    display: none;
+    padding: 40px 24px;
+    text-align: center;
+    color: #7a9bbf;
+    font-size: 14px;
+}
+
+@media (max-width: 700px) {
+    .filter-bar { flex-direction: column; align-items: stretch; }
+    .filter-group { min-width: 0; }
+}
+
+/* Polje za kucanje sa prijedlozima unutar .filter-group (npr. Operater na
+   "Karta letova") - isti vizuelni obrazac kao .autocomplete-wrapper na
+   "Dodaj dron", ovdje zajednicki jer ga koristi i filter-bar. */
+.filter-group.autocomplete-wrapper { position: relative; }
+
+.filter-group .autocomplete-list {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 20;
+    margin-top: 4px;
+    max-height: 180px;
+    overflow-y: auto;
+    background: #10233a;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    list-style: none;
+    padding: 4px;
+}
+
+.filter-group .autocomplete-list.visible { display: block; }
+
+.filter-group .autocomplete-list li {
+    padding: 8px 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #e0e6ed;
+    cursor: pointer;
+}
+
+.filter-group .autocomplete-list li:hover { background: rgba(0, 120, 212, 0.15); }
+
+/* ===== FOTOGRAFIJA DRONA (kartica na "Dronovi"/"Moji dronovi") =====
+   .drone-grid .drone-card ima padding:0 (definisano po ulozi); sav ostali
+   sadržaj kartice ide u .drone-card-body koja nosi stvarni padding - tako
+   fotografija prirodno ispuni vrh kartice bez margin-hack trikova. */
+
+.drone-photo {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    border-radius: 12px 12px 0 0;
+    overflow: hidden;
+    background: #05090f;
+}
+
+.drone-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.drone-photo-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    box-sizing: border-box;
+    background: rgba(0, 120, 212, 0.08);
+    color: #5eb3f5;
+}
+
+.drone-card-body {
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.drone-photo-actions {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 6px;
+}
+
+.drone-photo-actions .icon-btn {
+    width: 32px;
+    height: 32px;
+    background: rgba(5, 9, 15, 0.55);
+    border-color: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+}
+
+.drone-photo-actions .icon-btn:hover {
+    background: rgba(0, 120, 212, 0.85);
+    border-color: #0078d4;
+    color: #ffffff;
+}
+
+.icon-btn:active { transform: scale(0.94); }
+
+@media (max-width: 700px) {
+    body { flex-direction: column; }
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        top: auto;
+        left: auto;
+        flex-direction: row;
+        overflow-x: auto;
+        overflow-y: visible;
+        padding: 16px;
+    }
+    .sidebar-brand { display: none; }
+    .nav-list { flex-direction: row; padding: 0; }
+    .nav-divider { display: none; }
+    .nav-logout { padding: 0; }
+    .main { margin-left: 0; padding: 24px; }
+}

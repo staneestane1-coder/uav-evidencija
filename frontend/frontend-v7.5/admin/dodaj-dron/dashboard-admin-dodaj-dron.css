@@ -1,0 +1,181 @@
+.page-header {
+    margin-bottom: 28px;
+}
+
+.back-link {
+    display: inline-block;
+    color: #5a7a9a;
+    text-decoration: none;
+    font-size: 13px;
+    margin-bottom: 16px;
+}
+
+.back-link:hover { color: #5eb3f5; }
+
+.page-header h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 8px;
+}
+
+.page-header p {
+    font-size: 14px;
+    color: #7a9bbf;
+}
+
+.form-panel { padding: 32px; max-width: 640px; }
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.form-group { margin-bottom: 18px; }
+
+.form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: #7a9bbf;
+    margin-bottom: 6px;
+}
+
+.form-group input, .form-group select {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: #e0e6ed;
+    font-size: 14px;
+    padding: 11px 14px;
+    outline: none;
+    font-family: inherit;
+}
+
+.form-group input::placeholder { color: #4a6a8a; }
+
+.form-group input:focus, .form-group select:focus {
+    border-color: #0078d4;
+    background: rgba(0, 120, 212, 0.06);
+}
+
+/* appearance: none - bez ovoga select zadrzava browser-nativnu (OS-zavisnu) strelicu,
+   vizuelno nekonzistentnu sa ostatkom aplikacije (operater/kontrola stranice ovo vec imaju
+   - isti obrazac, preslikano odavde). */
+.form-group select {
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%237a9bbf' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+    cursor: pointer;
+}
+
+.form-group select option { background: #10233a; color: #e0e6ed; }
+
+/* Operater - polje za kucanje sa prijedlozima (vidi dashboard-admin-dodaj-dron.js) */
+/* align-self: start - bez ovoga, .form-row (CSS grid, default align-items: stretch)
+   rasteze ovaj wrapper na visinu susjednog (visljeg) polja u redu, pa se
+   .autocomplete-list (position:absolute, top:100%) pozicionira ispod te rastegnute
+   visine umjesto neposredno ispod inputa - vidljivo tek kad je susjedno polje u redu
+   vislje (npr. admin/prijavi-let, gdje "Dron" polje ima i skriveni form-hint ispod sebe). */
+.autocomplete-wrapper { position: relative; align-self: start; }
+
+.autocomplete-list {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 20;
+    margin-top: 4px;
+    max-height: 180px;
+    overflow-y: auto;
+    background: #10233a;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    list-style: none;
+    padding: 4px;
+}
+
+.autocomplete-list.visible { display: block; }
+
+.autocomplete-list li {
+    padding: 8px 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #e0e6ed;
+    cursor: pointer;
+}
+
+.autocomplete-list li:hover { background: rgba(0, 120, 212, 0.15); }
+
+.form-error {
+    color: #ff6b6b;
+    font-size: 13px;
+    min-height: 18px;
+    margin-bottom: 8px;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 12px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.btn-cancel {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    color: #e0e6ed;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-cancel:hover { background: rgba(255, 255, 255, 0.1); }
+
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #0078d4;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 11px 22px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.btn-primary:hover { background: #006abc; }
+.btn-primary:active { transform: scale(0.98); }
+.btn-primary:disabled { background: #3a5a78; cursor: not-allowed; }
+
+.doc-section { margin: 20px 0 24px 0; }
+
+.form-hint {
+    font-size: 12px;
+    color: #7a9bbf;
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+@media (max-width: 500px) {
+    .form-row { grid-template-columns: 1fr; }
+    .form-panel { padding: 20px; }
+}

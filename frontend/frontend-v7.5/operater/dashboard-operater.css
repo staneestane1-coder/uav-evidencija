@@ -1,0 +1,760 @@
+.page-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.page-header h2 { font-size: 24px; font-weight: 700; color: #ffffff; margin-bottom: 6px; }
+.page-header p { font-size: 14px; color: #7a9bbf; }
+
+.btn-add {
+    display: inline-flex;
+    text-decoration: none;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 20px;
+    background: #0078d4;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.btn-add:hover { background: #006abc; }
+.btn-add:active { transform: scale(0.98); }
+
+/* Stat cards */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 32px;
+}
+
+.stat-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 22px 24px;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    transition: border-color 0.2s, transform 0.15s;
+}
+
+.stat-card:hover { border-color: rgba(0, 120, 212, 0.4); transform: translateY(-2px); }
+
+.stat-card .stat-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+
+.stat-card .stat-icon {
+    width: 38px; height: 38px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; background: rgba(0, 120, 212, 0.15);
+}
+
+.stat-card.warning .stat-icon { background: rgba(220, 150, 50, 0.15); }
+
+.stat-card .stat-value { font-size: 30px; font-weight: 700; color: #ffffff; line-height: 1; margin-bottom: 6px; }
+
+.stat-card .stat-label {
+    font-size: 12px; color: #7a9bbf; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 500;
+}
+
+/* Content grid: tabela letova + lista dronova */
+.content-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+.panel {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.panel-header { padding: 20px 24px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
+.panel-header h3 { font-size: 16px; font-weight: 600; color: #ffffff; }
+
+table { width: 100%; border-collapse: collapse; }
+
+thead th {
+    text-align: left; font-size: 12px; font-weight: 600; color: #7a9bbf;
+    text-transform: uppercase; letter-spacing: 0.5px; padding: 14px 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+tbody td {
+    padding: 14px 24px; font-size: 14px; color: #e0e6ed;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: rgba(255, 255, 255, 0.03); }
+
+.badge { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+.badge.success { background: rgba(50, 180, 100, 0.15); color: #4ade80; }
+.badge.planned { background: rgba(150, 130, 220, 0.15); color: #b39ddb; }
+.badge.warning { background: rgba(220, 150, 50, 0.15); color: #f5b95e; }
+.badge.danger { background: rgba(220, 50, 50, 0.15); color: #ff6b6b; }
+.badge.neutral { background: rgba(255, 255, 255, 0.08); color: #9fb3c8; }
+.badge.status-progress { background: rgba(0, 120, 212, 0.15); color: #5eb3f5; }
+
+/* Razlog odbijanja leta (title tooltip) - <button> (ne .icon-btn, koje na ovoj stranici
+   nije ni definisano) radi tastature/aria-label, sa min. 24px hit-area za dodir - vidi
+   "Moji letovi". Samo prikazuje tekst na hover/fokus, nema drugu akciju. */
+.reason-hint {
+    min-width: 24px; min-height: 24px;
+    display: inline-flex; align-items: center; justify-content: center;
+    border: none; background: none; padding: 0 4px;
+    font-size: 15px; color: #7a9bbf;
+    cursor: help;
+}
+.reason-hint:hover, .reason-hint:focus-visible { color: #f5b95e; background: none; }
+.badge.status-enabled { background: rgba(50, 180, 100, 0.15); color: #4ade80; }
+
+.row-time { color: #7a9bbf; font-size: 13px; }
+
+/* Drones panel */
+.drone-list { padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+
+.drone-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+
+.drone-item:hover { background: rgba(255, 255, 255, 0.03); }
+
+.drone-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: rgba(0, 120, 212, 0.15);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; flex-shrink: 0;
+}
+
+.drone-info { flex: 1; min-width: 0; }
+.drone-name { color: #ffffff; font-weight: 600; font-size: 14px; }
+.drone-meta { color: #7a9bbf; font-size: 12px; margin-top: 2px; }
+
+@media (max-width: 1000px) {
+    .content-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 900px) {
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 700px) {
+    .stats-grid { grid-template-columns: 1fr; }
+}
+
+/* ===== PRIJAVI LET – FORMA ===== */
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #7a9bbf;
+    text-decoration: none;
+    font-size: 13px;
+    margin-bottom: 14px;
+    transition: color 0.2s;
+}
+
+.back-link:hover { color: #ffffff; }
+
+.form-layout {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+.form-panel { padding: 28px 28px 24px 28px; }
+
+.form-section { margin-bottom: 26px; }
+.form-section:last-of-type { margin-bottom: 0; }
+
+.form-section-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: #7a9bbf;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 14px;
+}
+
+/* Izbor drona */
+.drone-select-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+
+.drone-select-option {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.02);
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.drone-select-option:hover { border-color: rgba(0, 120, 212, 0.35); }
+
+.drone-select-option input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+
+.drone-select-option.selected {
+    border-color: #0078d4;
+    background: rgba(0, 120, 212, 0.12);
+}
+
+.drone-select-option .drone-icon { background: rgba(0, 120, 212, 0.18); }
+
+.drone-select-option .drone-battery {
+    font-size: 12px;
+    color: #7a9bbf;
+    margin-top: 2px;
+}
+
+.drone-select-option .check-mark {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255, 255, 255, 0.25);
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; color: transparent;
+    transition: border-color 0.2s, background 0.2s, color 0.2s;
+}
+
+.drone-select-option.selected .check-mark {
+    border-color: #0078d4;
+    background: #0078d4;
+    color: #ffffff;
+}
+
+.drone-select-option.disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.drone-select-option.disabled input { cursor: not-allowed; }
+
+/* Datum i vrijeme - auto polja */
+.datetime-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+/* Razmak IZNAD kutije "Planirani datum i vrijeme" mora biti isti kao razmak ISPOD nje
+   (.form-hint ispod kutije ima margin-top: 8px - vidi dashboard-operater-prijavi-let.html) -
+   bez ovoga se kolabira na 0, jer ni tekst iznad ni sama kutija nemaju svoj margin. */
+#futureDateTimeGroup { margin-top: 8px; }
+
+.datetime-display {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.datetime-display .dt-icon { font-size: 15px; opacity: 0.8; }
+
+.datetime-display .dt-text { display: flex; flex-direction: column; gap: 2px; flex: 1; }
+.datetime-display .dt-label { font-size: 11px; color: #7a9bbf; text-transform: uppercase; letter-spacing: 0.5px; }
+.datetime-display .dt-value { font-size: 14px; color: #ffffff; font-weight: 600; font-variant-numeric: tabular-nums; }
+
+/* Editable varijanta - koristi se za "planirani datum i vrijeme" (status = planiran),
+   iste kutije kao read-only prikaz iznad, samo sa pravim inputom umjesto teksta. */
+.datetime-display.editable {
+    border-color: rgba(255, 255, 255, 0.1);
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.datetime-display.editable:focus-within {
+    border-color: #0078d4;
+    background: rgba(0, 120, 212, 0.06);
+}
+
+.datetime-display .dt-input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: inherit;
+    font-variant-numeric: tabular-nums;
+    width: 100%;
+    padding: 0;
+    color-scheme: dark;
+}
+
+.datetime-display .dt-input::-webkit-calendar-picker-indicator {
+    filter: invert(0.7) brightness(1.4);
+    cursor: pointer;
+}
+
+.form-group.error .datetime-display { border-color: #ff6b6b; }
+
+/* Standardna polja forme */
+.form-group { margin-bottom: 18px; }
+.form-group:last-child { margin-bottom: 0; }
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+.form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #e0e6ed;
+    margin-bottom: 8px;
+}
+
+.form-group .optional-tag,
+.form-section-title .optional-tag {
+    font-weight: 400;
+    color: #7a9bbf;
+    text-transform: none;
+    letter-spacing: 0;
+    margin-left: 4px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 11px 14px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 14px;
+    font-family: inherit;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.form-group input::placeholder, .form-group textarea::placeholder { color: #5a7699; }
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #0078d4;
+    background: rgba(0, 120, 212, 0.06);
+}
+
+.form-group textarea { resize: vertical; min-height: 80px; }
+
+.form-group select {
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%237a9bbf' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+    cursor: pointer;
+}
+
+.form-group select option { background: #10233a; color: #e0e6ed; }
+
+/* Dron - polje za kucanje sa prijedlozima (isti obrazac kao svugdje drugdje u aplikaciji -
+   vidi admin/dodaj-dron/dashboard-admin-dodaj-dron.css, odakle je preslikano). */
+.autocomplete-wrapper { position: relative; align-self: start; }
+
+.autocomplete-list {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 20;
+    margin-top: 4px;
+    max-height: 180px;
+    overflow-y: auto;
+    background: #10233a;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    list-style: none;
+    padding: 4px;
+}
+
+.autocomplete-list.visible { display: block; }
+
+.autocomplete-list li {
+    padding: 8px 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #e0e6ed;
+    cursor: pointer;
+}
+
+.autocomplete-list li:hover { background: rgba(0, 120, 212, 0.15); }
+
+.form-hint { font-size: 12px; color: #7a9bbf; margin-top: 6px; }
+
+.form-error {
+    font-size: 13px;
+    color: #ff6b6b;
+    margin-top: 16px;
+    min-height: 0;
+}
+
+.form-error:empty { margin-top: 0; }
+
+.form-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 20px;
+    padding-top: 22px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 22px;
+    background: #0078d4;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.btn-primary:hover { background: #006abc; }
+.btn-primary:active { transform: scale(0.98); }
+.btn-primary:disabled { background: #3a5a78; cursor: not-allowed; }
+
+.btn-cancel {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #e0e6ed;
+    font-size: 14px;
+    font-weight: 500;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.btn-cancel:hover { background: rgba(255, 255, 255, 0.1); }
+
+/* .field-error/.form-group.error su u shared/layout.css */
+
+/* Sidebar sažetak */
+.summary-panel { padding: 22px 24px; }
+
+.summary-panel-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 12px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.summary-row:last-child { border-bottom: none; padding-bottom: 0; }
+.summary-row:first-child { padding-top: 0; }
+
+.summary-label { font-size: 13px; color: #7a9bbf; }
+.summary-value { font-size: 13px; color: #ffffff; font-weight: 600; text-align: right; }
+
+.summary-note {
+    margin-top: 18px;
+    padding: 14px;
+    border-radius: 8px;
+    background: rgba(0, 120, 212, 0.08);
+    border: 1px solid rgba(0, 120, 212, 0.2);
+    font-size: 12px;
+    color: #a8c5e0;
+    line-height: 1.5;
+}
+
+/* Toast poruka o uspjehu */
+.toast-success {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 20px;
+    background: #12301f;
+    border: 1px solid rgba(74, 222, 128, 0.35);
+    border-radius: 10px;
+    color: #4ade80;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    transform: translateY(-12px);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+    z-index: 100;
+}
+
+.toast-success.show { transform: translateY(0); opacity: 1; }
+
+@media (max-width: 1000px) {
+    .form-layout { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 560px) {
+    .form-row, .datetime-row, .drone-select-grid { grid-template-columns: 1fr; }
+    .form-panel { padding: 22px 18px; }
+}
+
+/* ===== MOJI LETOVI – FILTERI =====
+   .filter-bar/.filter-group/.result-count/.empty-state su u shared/layout.css */
+
+.panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* ===== MOJI DRONOVI ===== */
+
+.drones-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.drone-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.drone-card-title { display: flex; align-items: center; gap: 14px; }
+
+.drone-icon-lg {
+    width: 46px; height: 46px; border-radius: 10px;
+    background: rgba(0, 120, 212, 0.15);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+}
+
+.drone-card-title h3 { font-size: 16px; font-weight: 600; color: #ffffff; margin-bottom: 3px; }
+.drone-model { font-size: 12px; color: #7a9bbf; }
+
+.drone-card-body { padding: 22px 24px 24px 24px; }
+
+/* Baterija */
+.battery-row { margin-bottom: 22px; }
+
+.battery-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #7a9bbf;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.battery-percent { color: #e0e6ed; }
+
+.battery-bar {
+    height: 8px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.06);
+    overflow: hidden;
+}
+
+.battery-fill { height: 100%; border-radius: 4px; transition: width 0.3s ease; }
+.battery-fill.good { background: #4ade80; }
+.battery-fill.medium { background: #f5b95e; }
+.battery-fill.low { background: #ff6b6b; }
+
+/* Statistika */
+.drone-stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.drone-stat { display: flex; flex-direction: column; gap: 4px; }
+.drone-stat-label { font-size: 11px; color: #7a9bbf; text-transform: uppercase; letter-spacing: 0.5px; }
+.drone-stat-value { font-size: 14px; color: #ffffff; font-weight: 600; }
+
+/* Dokumentacija: stilovi upload zone/liste fajlova su u shared/upload-widget.css */
+
+@media (max-width: 1000px) {
+    .drones-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 500px) {
+    .drone-stats-row { grid-template-columns: 1fr; gap: 10px; }
+}
+
+/* Kompaktna mreza dronova - koristi je "Moji dronovi" (dashboard-operater-dronovi.js)
+   Isti izgled kao admin/kontrola kartica drona (dashboard-admin-dronovi.css /
+   dashboard-kontrola-dronovi.css) - vrijednosti ovdje su namjerno identicne. */
+.drone-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.drone-grid .drone-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    overflow: hidden;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    transition: border-color 0.2s, transform 0.15s;
+    display: flex;
+    flex-direction: column;
+}
+
+.drone-grid .drone-card:hover { border-color: rgba(0, 120, 212, 0.4); transform: translateY(-2px); }
+.drone-grid .drone-card.offline { opacity: 0.7; }
+
+.drone-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+}
+
+.drone-grid .drone-name { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+.drone-serial { color: #7a9bbf; font-size: 12px; margin-bottom: 18px; }
+
+.drone-stats { display: flex; flex-direction: column; gap: 12px; margin-bottom: 18px; flex: 1; }
+
+/* .drone-grid prefiks je namjeran - iznad u fajlu postoji stariji, nepovezan .drone-stat
+   (flex-direction:column, za drugi kontekst) koji bi se inace sudario preko istog selektora. */
+.drone-grid .drone-stat { display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 10px; }
+.drone-grid .drone-stat .stat-label {
+    color: #7a9bbf;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+    flex-shrink: 0;
+}
+.drone-grid .drone-stat .stat-value { color: #ffffff; font-size: 13px; font-weight: 600; flex-shrink: 0; }
+
+.drone-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.badge.service { background: rgba(220, 150, 50, 0.15); color: #f5b95e; }
+.badge.offline { background: rgba(220, 50, 50, 0.15); color: #ff6b6b; }
+
+/* ===== MOJI LETOVI – UPOZORENJE OD KONTROLE (let "u-letu") =====
+   Umetnuti red ispod leta koji ima aktivno (nepotvrđeno) upozorenje - mora biti uočljiv,
+   ne samo tiho polje u tabeli (vidi dashboard-operater-letovi.js). */
+.flight-warning-row td { padding: 16px 24px; background: rgba(220, 50, 50, 0.06); }
+
+.flight-warning-alert {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding: 14px 16px;
+    border-radius: 8px;
+    background: rgba(220, 50, 50, 0.1);
+    border: 1px solid rgba(220, 50, 50, 0.35);
+}
+
+.flight-warning-text { flex: 1; min-width: 200px; font-size: 14px; color: #ff9b9b; line-height: 1.5; }
+.flight-warning-text strong { color: #ff6b6b; }
+
+.btn-ack-warning {
+    flex-shrink: 0;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    background: rgba(220, 50, 50, 0.85);
+    color: #ffffff;
+    border: 1px solid rgba(255, 90, 90, 0.5);
+    transition: background 0.2s, opacity 0.2s;
+}
+.btn-ack-warning:hover { background: rgba(220, 50, 50, 1); }
+.btn-ack-warning:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* ===== MOJI LETOVI – AKCIJE (Pokreni/Zavrsi/Otkazi, Zadatak 3) =====
+   Operater sam vodi svoj let kroz stanja - vidi dashboard-operater-letovi.js. Isti princip
+   kao kontrolina Odobri/Odbij dugmad (dashboard-kontrola.css), samo manji (13px/8px) jer se
+   na "planiran" redu prikazuju DVA dugmeta jedno pored drugog. */
+.row-action { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.btn-flight-action {
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, opacity 0.2s;
+}
+
+.btn-flight-start {
+    background: rgba(0, 120, 212, 0.85);
+    color: #ffffff;
+    border: 1px solid rgba(0, 120, 212, 0.5);
+}
+.btn-flight-start:hover { background: rgba(0, 120, 212, 1); }
+
+.btn-flight-finish {
+    background: rgba(50, 180, 100, 0.85);
+    color: #ffffff;
+    border: 1px solid rgba(80, 200, 120, 0.5);
+}
+.btn-flight-finish:hover { background: rgba(50, 180, 100, 1); }
+
+.btn-flight-cancel {
+    background: transparent;
+    color: #ff6b6b;
+    border: 1px solid rgba(220, 50, 50, 0.4);
+}
+.btn-flight-cancel:hover { background: rgba(220, 50, 50, 0.12); }
+
+.btn-flight-action:disabled { opacity: 0.6; cursor: not-allowed; }

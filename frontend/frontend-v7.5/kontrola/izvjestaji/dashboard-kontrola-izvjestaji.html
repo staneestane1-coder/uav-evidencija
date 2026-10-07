@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+<script src="../../shared/auth.js" data-required-role="kontrola_leta" data-login-path="../../login/login.html"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UAV Evidencija – Izvještaji</title>
+<link rel="stylesheet" href="../../shared/layout.css">
+<link rel="stylesheet" href="../dashboard-kontrola.css">
+</head>
+<body>
+
+    <nav class="sidebar">
+        <div class="sidebar-brand">
+            <span class="brand-icon">✈</span>
+            <h1>UAV Evidencija</h1>
+        </div>
+
+        <ul class="nav-list">
+            <li class="nav-item"><a href="../dashboard-kontrola.html"><span class="nav-icon" aria-hidden="true">📊</span> Pregled</a></li>
+            <li class="nav-item"><a href="../letovi-na-cekanju/dashboard-kontrola-letovi-na-cekanju.html"><span class="nav-icon" aria-hidden="true">⏳</span> Letovi na čekanju <span class="nav-badge" id="pendingFlightsBadge"></span></a></li>
+            <li class="nav-item"><a href="../letovi/dashboard-kontrola-letovi.html"><span class="nav-icon" aria-hidden="true">🗺</span> Letovi</a></li>
+            <li class="nav-item"><a href="../karta/dashboard-kontrola-karta.html"><span class="nav-icon" aria-hidden="true">📍</span> Karta letova</a></li>
+            <li class="nav-item active"><a href="dashboard-kontrola-izvjestaji.html"><span class="nav-icon" aria-hidden="true">📄</span> Izvještaji</a></li>
+            <li class="nav-item"><a href="../operateri/dashboard-kontrola-operateri.html"><span class="nav-icon" aria-hidden="true">👤</span> Operateri</a></li>
+            <li class="nav-item"><a href="../dronovi/dashboard-kontrola-dronovi.html"><span class="nav-icon" aria-hidden="true">🛰</span> Dronovi</a></li>
+            <li class="nav-item"><a href="../snimci/dashboard-kontrola-snimci.html"><span class="nav-icon" aria-hidden="true">📷</span> Snimci s terena</a></li>
+        </ul>
+
+        <div class="nav-divider"></div>
+        <div class="nav-logout">
+            <a href="#" id="logoutBtn"><span class="nav-icon" aria-hidden="true">⏻</span> Odjava</a>
+        </div>
+    </nav>
+
+    <main class="main">
+        <div class="page-header">
+            <h2>Izvještaji</h2>
+            <p>Generiši izvještaj o letovima za odabrani period i kriterije</p>
+        </div>
+
+        <div class="print-header" id="printHeader">
+            <div class="print-header-brand">UAV Evidencija — Izvještaj o letovima</div>
+            <div class="print-header-meta">
+                <span id="printPeriod">Period: —</span>
+                <span id="printGeneratedBy">Generisao: —</span>
+                <span id="printGeneratedAt">Datum generisanja: —</span>
+            </div>
+        </div>
+
+        <div class="panel report-builder">
+            <div class="panel-header"><h3>Parametri izvještaja</h3></div>
+            <div class="report-form">
+                <div class="form-row report-row">
+                    <div class="form-group">
+                        <label for="dateFrom">Od datuma</label>
+                        <input type="date" id="dateFrom">
+                    </div>
+                    <div class="form-group">
+                        <label for="dateTo">Do datuma</label>
+                        <input type="date" id="dateTo">
+                    </div>
+                    <div class="form-group">
+                        <label for="reportOperater">Operater</label>
+                        <select id="reportOperater">
+                            <option value="svi">Svi operateri</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="reportDrone">Dron</label>
+                        <select id="reportDrone">
+                            <option value="svi">Svi dronovi</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="reportStatus">Status</label>
+                        <select id="reportStatus">
+                            <option value="svi">Svi statusi</option>
+                            <option value="na-cekanju">Na čekanju</option>
+                            <option value="u-letu">U letu</option>
+                            <option value="zavrsen">Završen</option>
+                            <option value="planiran">Planiran</option>
+                            <option value="odbijen">Odbijen</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="report-actions">
+                    <button type="button" class="btn-primary" id="generateBtn">Generiši izvještaj</button>
+                    <span class="report-range-label" id="rangeLabel"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-grid report-stats">
+            <div class="stat-card">
+                <div class="stat-top"><span class="stat-icon">🗺</span></div>
+                <div class="stat-value" id="statTotal">0</div>
+                <div class="stat-label">Ukupno letova</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-top"><span class="stat-icon">⏱</span></div>
+                <div class="stat-value" id="statHours">0h</div>
+                <div class="stat-label">Ukupno sati leta</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-top"><span class="stat-icon">✅</span></div>
+                <div class="stat-value" id="statSuccess">0</div>
+                <div class="stat-label">Uspješno završenih</div>
+            </div>
+            <div class="stat-card warning">
+                <div class="stat-top"><span class="stat-icon">🕓</span></div>
+                <div class="stat-value" id="statPlanned">0</div>
+                <div class="stat-label">Planirano</div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-header">
+                <h3>Letovi u izvještaju</h3>
+                <div class="report-export-buttons">
+                    <button type="button" class="btn-export" id="exportCsvBtn"><span>⬇</span> Preuzmi Excel</button>
+                    <button type="button" class="btn-export" id="printBtn"><span>🖨</span> Odštampaj</button>
+                </div>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Operater</th><th>Dron</th><th>Lokacija</th><th>Status</th><th>Trajanje</th><th>Vrijeme</th>
+                    </tr>
+                </thead>
+                <tbody id="reportBody"></tbody>
+            </table>
+            <p class="empty-state" id="emptyState">Nema letova za odabrane parametre izvještaja.</p>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.4.0/exceljs.min.js"></script>
+    <script src="../../shared/api-config.js"></script>
+    <script src="../../shared/api.js"></script>
+    <script src="../../shared/pending-flights-badge.js"></script>
+    <script src="../../shared/change-password-modal.js"></script>
+    <script src="../../shared/snimci-utils.js"></script>
+    <script src="dashboard-kontrola-izvjestaji.js"></script>
+    <script src="../../shared/dashboard-admin-logout.js" data-login-path="../../login/login.html"></script>
+</body>
+</html>

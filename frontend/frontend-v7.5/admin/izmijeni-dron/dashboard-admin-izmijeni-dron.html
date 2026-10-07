@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+<script src="../../shared/auth.js" data-required-role="administrator" data-login-path="../../login/login.html"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UAV Evidencija – Izmijeni dron</title>
+<link rel="stylesheet" href="../../shared/layout.css">
+<link rel="stylesheet" href="../dronovi/dashboard-admin-dronovi.css">
+<link rel="stylesheet" href="../dodaj-dron/dashboard-admin-dodaj-dron.css">
+</head>
+<body>
+
+    <nav class="sidebar">
+        <div class="sidebar-brand">
+            <span class="brand-icon">✈</span>
+            <h1>UAV Evidencija</h1>
+        </div>
+
+        <ul class="nav-list">
+            <li class="nav-item"><a href="../dashboard-admin.html"><span class="nav-icon" aria-hidden="true">📊</span> Pregled</a></li>
+            <li class="nav-item"><a href="../korisnici/dashboard-admin-korisnici.html"><span class="nav-icon" aria-hidden="true">👤</span> Korisnici</a></li>
+            <li class="nav-item active"><a href="../dronovi/dashboard-admin-dronovi.html"><span class="nav-icon" aria-hidden="true">🛰</span> Dronovi</a></li>
+            <li class="nav-item"><a href="../letovi/dashboard-admin-letovi.html"><span class="nav-icon" aria-hidden="true">🗺</span> Letovi</a></li>
+            <li class="nav-item"><a href="../aktivnosti/dashboard-admin-aktivnosti.html"><span class="nav-icon" aria-hidden="true">📋</span> Aktivnosti</a></li>
+            <li class="nav-item"><a href="../snimci/dashboard-admin-snimci.html"><span class="nav-icon" aria-hidden="true">📷</span> Snimci s terena</a></li>
+        </ul>
+
+        <div class="nav-divider"></div>
+        <div class="nav-logout">
+            <a href="#" id="logoutBtn"><span class="nav-icon" aria-hidden="true">⏻</span> Odjava</a>
+        </div>
+    </nav>
+
+    <main class="main">
+        <div class="page-header">
+            <div>
+                <a href="../dronovi/dashboard-admin-dronovi.html" class="back-link">← Nazad na dronove</a>
+                <h2>Izmijeni dron</h2>
+                <p>Ažurirajte podatke o postojećem dronu</p>
+            </div>
+        </div>
+
+        <div class="panel form-panel">
+            <form id="editDroneForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="droneName">Naziv / oznaka drona</label>
+                        <input type="text" id="droneName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="droneModel">Model</label>
+                        <input type="text" id="droneModel" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="manufacturer">Proizvođač</label>
+                        <input type="text" id="manufacturer" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="serialNumber">Serijski broj</label>
+                        <input type="text" id="serialNumber" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group autocomplete-wrapper">
+                        <label for="operatorSearch">Dodijeljen operateru (opciono)</label>
+                        <input type="text" id="operatorSearch" placeholder="Upišite ime operatera..." autocomplete="off">
+                        <input type="hidden" id="operator">
+                        <ul class="autocomplete-list" id="operatorSuggestions"></ul>
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <select id="status" required>
+                            <option value="aktivan">Aktivan</option>
+                            <option value="servis">U servisu</option>
+                            <option value="neaktivan">Neaktivan</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="notes">Napomena (opciono)</label>
+                    <input type="text" id="notes" placeholder="Dodatne informacije o dronu">
+                </div>
+
+                <p class="form-hint">
+                    Fotografije, video zapisi i tehnička dokumentacija drona uređuju se preko dugmeta
+                    „📎“ na listi dronova, ne na ovoj formi.
+                </p>
+
+                <p class="form-error" id="formError"></p>
+
+                <div class="form-actions">
+                    <a href="../dronovi/dashboard-admin-dronovi.html" class="btn-cancel">Otkaži</a>
+                    <button type="submit" class="btn-primary">Sačuvaj izmjene</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script src="../../shared/api-config.js"></script>
+    <script src="../../shared/api.js"></script>
+    <script src="../../shared/change-password-modal.js"></script>
+    <script src="../../shared/autocomplete.js"></script>
+    <script src="dashboard-admin-izmijeni-dron.js"></script>
+    <script src="../../shared/dashboard-admin-logout.js" data-login-path="../../login/login.html"></script>
+</body>
+</html>
