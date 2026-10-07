@@ -13,7 +13,6 @@ Sistem za evidenciju dronova, prijavu i praćenje letova, upload fotografija/vid
 - [Pokretanje projekta](#pokretanje-projekta)
 - [Test nalozi](#test-nalozi)
 - [Sigurnosne mjere](#sigurnosne-mjere)
-- [Screenshotovi](#screenshotovi)
 
 ## Korištene tehnologije
 
@@ -120,7 +119,3 @@ Ako backend radi na drugom portu od podrazumijevanog, prilagodi `API_BASE_URL` u
 - JWT token se provjerava pri svakom zahtjevu (ne samo pri izdavanju) — deaktivacija naloga ili promjena uloge djeluje odmah, bez čekanja da token istekne
 
 Detaljnije u [`backend/diplomski-backend/README.md`](backend/diplomski-backend/README.md#sigurnosne-mjere).
-
-## Screenshotovi
-
-*(dodati snimke ekrana login stranice, admin/operater/kontrola dashboarda i karte letova)*
